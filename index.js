@@ -1,4 +1,5 @@
 //config inicial
+require('dotenv').config()
 const { urlencoded } = require('express')
 const express = require('express')
 const mongoose = require('mongoose')
@@ -15,13 +16,27 @@ app.use(
 app.use(express.json())
 
 //rotas da api
-//rotas user
+//rota user
 const userRoutes = require('./routes/userRoutes')
 app.use('/user', userRoutes)
 
-//rotas donors
+//rota donors
 const donorsRoutes = require('./routes/donorsRoutes')
 app.use('/donors', donorsRoutes)
+
+//rota books
+const booksRoutes = require('./routes/booksRoutes')
+app.use('/books', booksRoutes)
+
+// rota rented
+
+const rentedRoutes = require('./routes/rentedRoutes')
+app.use('/rented', rentedRoutes)
+
+//rota author
+
+const authorRoutes = require('./routes/authorRoutes')
+app.use('/author', rentedRoutes)
 
 //rotas iniciais
 app.get('/', (req, res)=>{
@@ -30,8 +45,8 @@ app.get('/', (req, res)=>{
 
 //entregar porta
 
-const DB_USER = 'gustavo'
-const DB_PASSWORD = '2zJnD8gMeZ2LuwZY'
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
 
 mongoose.connect(
     `mongodb+srv://${DB_USER}:${DB_PASSWORD}@agoracluster.z8ih2r0.mongodb.net/?retryWrites=true&w=majority`

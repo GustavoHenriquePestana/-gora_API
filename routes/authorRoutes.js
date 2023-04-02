@@ -1,20 +1,11 @@
 const router = require ('express').Router()
 const Author = require('../models/Author')
 
-route.post('/', async(req, res)=>{
+router.post('/', async(req, res)=>{
     const{name, bio, nationality, birth} = req.body
 
     if(!name){
         res.status(422).json({error: 'o nome é obrigatório!'})
-    }
-    if(!bio){
-        res.status(422).json({error: 'uma biografia resumida do autor é obrigatória!'})
-    }
-    if(!nationality){
-        res.status(422).json({error: 'a nacionalidade do author é obrigatória'})
-    }
-    if(!birth){
-        res.status(422).json({error: 'a data de nascimento do author é obrigatória'})
     }
     const author = {
         name, 

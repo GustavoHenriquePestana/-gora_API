@@ -21,7 +21,7 @@ router.post('/', async (req, res)=>{
         res.status(422).json({error: 'o endereço é obrigatório!'})
     }
     
-    const books = {
+    const book = {
         title,
         author,
         category,
@@ -30,7 +30,7 @@ router.post('/', async (req, res)=>{
     }
     try{
         //criar dados
-        await Books.create(books)
+        await Books.create(book)
         res.status(201).json({ message: 'Livro inserido com sucesso!'})
     }catch (error){
         res.status(500).json({ error: error})
@@ -40,9 +40,9 @@ router.post('/', async (req, res)=>{
 // Resgate de todos os livros
 router.get('/', async(req, res)=>{
     try{
-        const books = await Books.find()
+        const book = await Books.find()
 
-        res.status(200).json(books)
+        res.status(200).json(book)
     }catch(error){
         res.status(500).json({error: error})
     }
@@ -54,12 +54,12 @@ router.get('/:id', async (req, res) =>{
     
     const id = req.params.id
     try{
-        const books = await Books.findOne({_id: id})
+        const book = await Books.findOne({_id: id})
         if(!books){
             res.status(422).json({ message: 'o livro não foi encontrado '})
             return
         }
-        res.status(200).json(books)
+        res.status(200).json(book)
     }catch(error){
         res.status(500).json({error: error})
     }
@@ -73,7 +73,7 @@ router.patch('/:id', async(req, res)=> {
     const{title, author, category, publication, pages } = req.body
 
 
-    const books = {
+    const book = {
         title,
         author,
         category,
@@ -81,7 +81,7 @@ router.patch('/:id', async(req, res)=> {
         pages,
     }
     try{
-        const updatedBooks = await Books.updateOne({_id:id}, books)
+        const updatedBooks = await Books.updateOne({_id:id}, book)
 
         if(updatedBooks.matchedCount ===0) {
             res.status(422).json({message: 'O livro não foi encontrado'})
