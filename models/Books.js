@@ -6,5 +6,6 @@ const Books = mongoose.model('Books', {
     category: String,
     publication: String,
     pages: String,
+    image: String,
 })
 module.exports = Books

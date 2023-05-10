@@ -4,6 +4,7 @@ const { urlencoded } = require('express')
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
+const cors = require('cors');
 
 
 
@@ -13,7 +14,8 @@ app.use(
         extended: true,
     }),
 )
-app.use(express.json())
+app.use(express.json());
+app.use(cors())
 
 //rotas da api
 //rota user
@@ -53,6 +55,6 @@ mongoose.connect(
 )
     .then(() => {
         console.log('Conectamos ao MongoDB!')
-        app.listen(3000)
+        app.listen(3333)
     })
     .catch((err) => console.log(err))
