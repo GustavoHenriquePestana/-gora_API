@@ -4,7 +4,7 @@ const Books = require('../models/Books')
 
 router.post('/', async (req, res) => {
     const { title, author, category, publication, pages, image } = req.body
-
+    console.log(req.body)
     if (!title) {
         res.status(422).json({ error: 'o nome é obrigatório!' })
     }
@@ -35,9 +35,9 @@ router.post('/', async (req, res) => {
     try {
         //criar dados
         await Books.create(book)
-        res.status(201).json({ message: 'Livro inserido com sucesso!' })
+        res.status(201).json({ status: 'success', message: 'Livro inserido com sucesso!' })
     } catch (error) {
-        res.status(500).json({ error: error })
+        res.status(500).json({ status: 'error', error: error })
     }
 })
 
